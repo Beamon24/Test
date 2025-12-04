@@ -1,0 +1,30 @@
+Notre projet nous a conduit à développer un solveur de nonogrammes. 
+Pour ce faire, nous avons adopté une stratégie consistant à résoudre nous-mêmes des nonogrammes afin de comprendre comment élaborer un solveur.
+Lors de nos essais, nous avons découvert des procédés particuliers.
+Parmi ceux-ci, nous avons d'abord identifié la résolution triviale :
+
+Cette dernière est très simple ; elle consiste en la première étape d'une résolution de nonogramme, à savoir compléter une ligne entièrement,
+qu'elle soit remplie de True, de False ou qu'elle puisse se résoudre en respectant les indices.
+Cette étape initiale est cruciale pour avancer, car sans cela, le début peut s'avérer relativement complexe.
+
+En deuxième étape, il est important de vérifier si le remplissage d'une ligne n'a pas débloqué d'autres lignes.
+C'est pourquoi nous avons élaboré des fonctions de remplissage de ligne.
+Les deux premières fonctions se chargent de remplir les lignes et colonnes avec des False : 
+Pour ce faire, il suffit de vérifier si la somme des indices correspond au nombre de cases déjà coloriées dans les lignes ou colonnes associées.
+Ensuite, nous faisons de même pour les True :
+Pour cela, nous nous intéressons au nombre de cases non coloriées (None) et au nombre de cases restantes à colorier.
+Si nous avons autant de cases en None que de cases restantes à colorier, alors on peut déduire que toutes ces cases sont à colorier.
+
+Après notre résolution par déduction, nous pouvons rapidement nous retrouver bloqués.
+Pour remédier à cela, nous avons mis en œuvre des fonctions capables de détecter la présence de cases "obligatoires" :
+En effet, lors de la résolution, certaines cases peuvent être obligatoires.
+Par exemple, une ligne de 10 cases avec un indice de 8 aura forcément certaines cases coloriées. Pour cela, nous admettons deux cas ;
+le pire cas gauche et le pire cas droite , dans le pire cas gauche, nous remplissons les 8 premières cases et dans le pire cas droite,
+nous remplissons les 8 dernières cases.
+Dans les deux cas nous observons des cases qui sont coloriées , ce sont des cases obligatoires.
+
+Finalement, notre programme se charge de compléter la grille au fur et à mesure.
+Il est possible que le solveur ne résolve pas la grille.
+Pour cela, nous aurions pu essayer une fonction qui ajoute aléatoirement un True ou un False dans la grille pour débloquer certaines situations.
+Nous n'avons pas élaboré cette fonction parce que notre objectif est de reproduire les procédés humains.
+Malgré cela, notre solveur est capable de résoudre des grilles efficacement. 
