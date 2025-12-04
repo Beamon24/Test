@@ -26,12 +26,10 @@ function moving() {
         newX = Math.random() * (container.clientWidth - btnWidth);
         newY = Math.random() * (container.clientHeight - btnHeight);
 
-        // Comprobar que no se superponga con los otros elementos
         safe = true;
         for (let el of others) {
             const rect = el.getBoundingClientRect();
 
-            // Convertir las coordenadas relativas al contenedor
             const elX = rect.left - containerRect.left;
             const elY = rect.top - containerRect.top;
             const elW = rect.width;
@@ -44,8 +42,6 @@ function moving() {
             }
         }
     }
-
-    // Aplicar la posición
     submit.style.position = "absolute";
     submit.style.left = `${newX}px`;
     submit.style.top = `${newY}px`;
@@ -135,7 +131,7 @@ function displayRules(rules) {
     visibleRules.reverse();
 
     container.innerHTML = visibleRules
-        .map(r => `<p style="color:${r.ok ? "green" : "red"}">${r.text}</p>`)
+        .map(r => `<p style="color:${r.ok ? "lightgreen" : "lightsalmon"}">${r.text}</p>`)
         .join("");
 
     const allValid = Object.values(rules).every(v => v === true);

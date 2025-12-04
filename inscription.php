@@ -1,12 +1,52 @@
-<?php
-if (isset($_POST['pwd']) && !empty($_POST['pwd'])){
-    $password = $_POST['pwd'];
-    //echo "<script>";
-    
-}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Titre de la page</title>
+  <link rel="stylesheet" href="inscription.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="cours">
+    <p>En cours...</p>
+    <script>
+        setTimeout(() => {
+            let p = document.querySelector("p");
+            p.textContent = "Pas possible de t'inscrire, désolé !";
 
- 
+            setTimeout(() => {
+            window.location.href = "inscription.html";
+            window.location.replace("inscription.html");
+            }, 2000);
+        }, 3000);
 
+        
+    </script>
+</div>
+</body>
+<script src="inscription.js"></script>
 
+<audio id="audio" src="audio.mp3" loop></audio>
 
-?>
+<button id="btn">Activer le son</button>
+
+<script>
+    const audio = document.getElementById("audio");
+    const btn = document.getElementById("btn");
+
+    btn.onclick = () => {
+        if (audio.paused) {
+            audio.play();
+            btn.textContent = "Désactiver le son";
+        } else {
+            audio.pause();
+            btn.textContent = "Activer le son";
+            console.log("Son désactivée.");
+        }
+    };
+</script>
+
+</html>

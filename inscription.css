@@ -8,7 +8,7 @@ body{
     background-color: #2b2b2b;
     border: 2px gray solid;
     width: 40%;
-    height: 70%;
+    height: 75%;
     position: absolute;
 	top: 50%;
 	left: 50%;
@@ -29,7 +29,8 @@ body{
     display: flex;
 	justify-content: center;
 	align-items: center;
-    text-align: center;
+    top: 70%;
+	left: 41.6%;
 }
 
 .rules{
@@ -61,4 +62,19 @@ body{
     padding: 10px 20px;
     cursor: pointer;
     transition: left 0.3s ease, top 0.3s ease;
+}
+
+.cours{
+    background-color: #2b2b2b;
+    border: 2px gray solid;
+    width: 40%;
+    height: 30%;
+    position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    display: flex;
+	justify-content: center;
+	align-items: center;
+    box-shadow: 5px 5px 15px gray;
 }
