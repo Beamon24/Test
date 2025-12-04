@@ -1,10 +1,30 @@
 body{
     font-family: "Bitcount Prop Single";
+    background-color: darkslateblue;
+    background-image: radial-gradient(circle at top, #ff00ff55, transparent 60%),
+                      radial-gradient(circle at bottom, #00ffff55, transparent 60%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+}
+
+div{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    background-color: darkslateblue;
+    width: 80%;
+}
+
+#copy{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: gold;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-decoration: none;
 }
 
 #section1{
@@ -18,18 +38,92 @@ h1{
     font-size: 50px;
 }
 
-h4{
+h3{
     letter-spacing: 5px;
+
 }
 
-h1, h4 {
+h1, h3 {
     color: gold;
 }
 
 #section2{
-    width: 50%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: gold;
+    letter-spacing: 3px;
+    
+}
+
+#directions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+    width: 200px;
+    margin: 20px auto;
+}
+
+.arrow {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+#directions img:nth-child(1) {
+    grid-column: 2 / 3; 
+    grid-row: 1 / 2;
+}
+
+#directions img:nth-child(2) {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+#directions img:nth-child(3) {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+#directions img:nth-child(4) {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.arrow-pressed {
+    /* Utilise le filtre brightness pour assombrir l'image */
+    filter: brightness(70%); /* 70% de la luminosité originale */
 }
 
 input{
     font-family: "Bitcount Prop Single";
+}
+
+.bounce-animation {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px;
+    position: relative;
+    animation: bounce-in 1.5s ease-out 1;
+}
+
+
+@keyframes bounce-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-500px);
+    }
+    50% {
+        transform: translateY(50px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }

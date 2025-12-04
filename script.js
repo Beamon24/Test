@@ -1,26 +1,50 @@
 const canvas = document.getElementById("grille");
 const ctx = canvas.getContext("2d");
 
-// Dimensions du canvas
 const width = canvas.width;
 const height = canvas.height;
 
 const boxSize = 40;
-
 const gameSpeed = 150;
 
 let snake = [
-  { x: 4 * boxSize, y: 5 * boxSize } // Position de départ au milieu du canvas
+    { x: 4 * boxSize, y: 5 * boxSize }
 ];
 
 let direction = "RIGHT";
 let score = 0;
-
+const eatSound = new Audio('sounds/sound_point.wav');
+const victorySound = new Audio('sounds/victory_sound.mp3');
+const losingSound = new Audio('sounds/losing_sound.mp3');
 
 const scoreDisplay = document.getElementById("score");
-
+const highScoreDisplay = document.getElementById("highScoreDisplay");
 let game;
 
+const RECORD_KEY = 'snakeHighScore'; 
+
+let currentHighScore = sessionStorage.getItem(RECORD_KEY);
+if (highScoreDisplay) {
+    highScoreDisplay.textContent = currentHighScore ? currentHighScore : '0';
+}
+
+const beeImage = new Image();
+beeImage.src = 'images/bee.png';
+
+const foodImages = [];
+const imagePaths = [
+    'images/google.png', 
+    'images/apple.png', 
+    'images/facebook.png', 
+    'images/amazon.png', 
+    'images/microsoft.png'
+];
+
+imagePaths.forEach(path => {
+    const img = new Image();
+    img.src = path;
+    foodImages.push(img);
+});
 
 function getRandomFoodPosition() {
   return {
@@ -30,15 +54,13 @@ function getRandomFoodPosition() {
 }
 let food = getRandomFoodPosition();
 
-document.addEventListener("keydown", changeDirection);
 function changeDirection(event) {
     const keyPressed = event.key; 
-    
     const LEFT = "ArrowLeft";
     const UP = "ArrowUp";
     const RIGHT = "ArrowRight";
     const DOWN = "ArrowDown";
-    
+
     if (keyPressed === LEFT && direction !== "RIGHT") {
         direction = "LEFT";
     } else if (keyPressed === UP && direction !== "DOWN") {
@@ -50,75 +72,138 @@ function changeDirection(event) {
         direction = "DOWN";
     }
 }
+document.addEventListener("keydown", changeDirection);
 
-// Fonction principale du jeu
+function checkAndSaveHighScore(currentScore) {
+    const oldHighScore = sessionStorage.getItem(RECORD_KEY);
+    
+    if (oldHighScore === null || currentScore > parseInt(oldHighScore)) {
+        // Sauvegarder le nouveau record
+        sessionStorage.setItem(RECORD_KEY, currentScore.toString());
+        
+        if (highScoreDisplay) {
+            highScoreDisplay.textContent = currentScore;
+        }
+    }
+}
+
 function gameLoop() {
-  let headX = snake[0].x;
-  let headY = snake[0].y;
-  let section2 = document.getElementById("section2");
+    let headX = snake[0].x;
+    let headY = snake[0].y;
+    let section2 = document.getElementById("section2");
+
     if (direction === "LEFT") headX -= boxSize;
     if (direction === "UP") headY -= boxSize;
     if (direction === "RIGHT") headX += boxSize;
     if (direction === "DOWN") headY += boxSize; 
-    // Vérifier les collisions avec les murs
+        
     if (headX < 0 || headX >= width || headY < 0 || headY >= height) {
         clearInterval(game);
-        section2.innerHTML = "<h2 style='color: gold; text-align: center;'>Game Over! Votre score: " + score + "</h2> <input type='button' value='Rejouer' onclick='location.reload()' style='display: block; margin: 0 auto; padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;'>";
+        checkAndSaveHighScore(score); 
+        losingSound.currentTime = 0;
+        losingSound.play();
+        let gameOverContent = 
+            "<h2 style='color: gold; text-align: center;'>Game Over! Votre score: " + score + "</h2>" + 
+            "<input type='button' value='Rejouer' onclick='location.reload()' style='padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;'>";
+        section2.innerHTML = "<div class=\"bounce-animation gm\">" + gameOverContent + "</div>";
         return;
     }
-    // Vérifier les collisions avec le corps du serpent
+    
     for (let i = 1; i < snake.length; i++) {
-        if (headX === snake[i].x && headY === snake[i].y) {
-            clearInterval(game);
-            section2.innerHTML = "<h2 style='color: gold; text-align: center;'>Game Over! Votre score: " + score + "</h2>";
-            return;
-        }
+    if (headX === snake[i].x && headY === snake[i].y) {
+        clearInterval(game);
+        checkAndSaveHighScore(score); 
+        losingSound.currentTime = 0;
+        losingSound.play();
+        let gameOverContent = 
+            "<h2 style='color: gold; text-align: center;'>Game Over! Votre score: " + score + "</h2>" + 
+            "<input type='button' value='Rejouer' onclick='location.reload()' style='padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;'>";
+        section2.innerHTML = "<div class=\"bounce-animation gm\">" + gameOverContent + "</div>";
+        return;
+        }    
     }
-    // Ajouter la nouvelle tête au début du tableau du serpent
+    
     snake.unshift({ x: headX, y: headY });
 
-    // Vérifier si le serpent a mangé la nourriture
     if (headX === food.x && headY === food.y) {
+        eatSound.currentTime = 0; 
+        eatSound.play();
         score++;
         scoreDisplay.textContent = score;
         food = getRandomFoodPosition();
+        if (score === 20) {
+            clearInterval(game);
+            victorySound.currentTime = 0;
+            victorySound.play();
+            let victoryContent = 
+            "<h2 style='color: gold; text-align: center;'>Félicitations! <br>Vous avez gagné avec un score de " + score + "!</h2>" + 
+            "<input type='button' value='Rejouer' onclick='location.reload()' style='padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;'>";
+            section2.innerHTML = "<div class=\"bounce-animation gm\">" + victoryContent + "</div>";
+            checkAndSaveHighScore(score); 
+            return;
+        }
+
     } else {
-        // Retirer le dernier segment du serpent (il se déplace)
         snake.pop();
     }
-
-
+    
     ctx.clearRect(0, 0, width, height);
 
-
-    const Google = new Image();
-    Google.src = 'images/google.png';
-    const Apple = new Image();
-    Apple.src = 'images/apple.png';
-    const Facebook = new Image();
-    Facebook.src = 'images/facebook.png';
-    const Amazon = new Image();
-    Amazon.src = 'images/amazon.png';
-    const Microsoft = new Image();
-    Microsoft.src = 'images/microsoft.png';
-
-    Liste = [Google, Apple, Facebook, Amazon, Microsoft];
-    let logo = Liste[Math.floor(Math.random() * Liste.length)];
+    let logo = foodImages[Math.floor(Math.random() * foodImages.length)];
     ctx.drawImage(logo, food.x, food.y, boxSize, boxSize);
-
-
-    // Dessiner le serpent
-    
-    
-    const bee = new Image();
-    bee.src = 'images/bee.png';
     for (let segment of snake) {
-        ctx.drawImage(bee, segment.x, segment.y, boxSize, boxSize);
+        ctx.drawImage(beeImage, segment.x, segment.y, boxSize, boxSize);
     }
-}   
+}
 
-// Démarrer le jeu
+document.addEventListener('keydown', function(event) {
+    let arrowElement;
+    
+    switch (event.key) {
+        case 'ArrowUp':
+            arrowElement = document.getElementById('arrow-up');
+            break;
+        case 'ArrowDown':
+            arrowElement = document.getElementById('arrow-down');
+            break;
+        case 'ArrowLeft':
+            arrowElement = document.getElementById('arrow-left');
+            break;
+        case 'ArrowRight':
+            arrowElement = document.getElementById('arrow-right');
+            break;
+        default:
+            return;
+    }
+
+    if (arrowElement && !arrowElement.classList.contains('arrow-pressed')) {
+        arrowElement.classList.add('arrow-pressed');
+    }
+});
+
+document.addEventListener('keyup', function(event) {
+    let arrowElement;
+
+    switch (event.key) {
+        case 'ArrowUp':
+            arrowElement = document.getElementById('arrow-up');
+            break;
+        case 'ArrowDown':
+            arrowElement = document.getElementById('arrow-down');
+            break;
+        case 'ArrowLeft':
+            arrowElement = document.getElementById('arrow-left');
+            break;
+        case 'ArrowRight':
+            arrowElement = document.getElementById('arrow-right');
+            break;
+        default:
+            return;
+    }
+    
+    if (arrowElement) {
+        arrowElement.classList.remove('arrow-pressed');
+    }
+});
+
 game = setInterval(gameLoop, gameSpeed);
-
-
-
