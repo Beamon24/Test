@@ -1,0 +1,25 @@
+{
+  "name": "test_local",
+  "version": "1.0.0",
+  "description": "Projet Nuit de l'info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beamon24/Test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Beamon24/Test/issues"
+  },
+  "homepage": "https://github.com/Beamon24/Test#readme",
+  "dependencies": {
+    "@google/genai": "^1.31.0",
+    "express": "^5.2.1"
+  }
+}

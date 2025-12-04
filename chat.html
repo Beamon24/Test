@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Gemini Sécurisé</title>
+</head>
+<body>
+    <h1>Parlez à Gemini</h1>
+    <input type="text" id="userInput" placeholder="Votre question...">
+    <button id="sendButton">Envoyer</button>
+    <div id="responseOutput"></div>
+
+    <script>
+        document.getElementById('sendButton').addEventListener('click', async () => {
+            const prompt = document.getElementById('userInput').value;
+            const outputDiv = document.getElementById('responseOutput');
+            
+            if (!prompt) {
+                outputDiv.textContent = "Veuillez entrer une question.";
+                return;
+            }
+
+            outputDiv.textContent = "Réponse en cours...";
+            const SERVER_URL = 'http://localhost:3000/api/generate'; 
+
+            try {
+                const response = await fetch(SERVER_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // Le corps contient la donnée "prompt" pour le serveur
+                    body: JSON.stringify({ prompt: prompt }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Afficher la réponse de Gemini renvoyée par le serveur
+                    outputDiv.textContent = data.text;
+                } else {
+                    // Gérer les erreurs du serveur (ex: prompt manquant, erreur Gemini)
+                    outputDiv.textContent = `Erreur du serveur: ${data.error}`;
+                }
+
+            } catch (error) {
+                console.error("Erreur de connexion:", error);
+                outputDiv.textContent = "Erreur de connexion. Assurez-vous que le serveur est démarré.";
+            }
+        });
+    </script>
+</body>
+</html>
