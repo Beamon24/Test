@@ -108,7 +108,7 @@ function displayRules(rules) {
         { key: "hasAI",           text: "Contient le nom d'une IA connue" },
         { key: "divisibleBy5",    text: "Contient un chiffre divisible par 5" },
         { key: "emojiEuro",       text: "Contient l'émoji 💶" },
-        { key: "product2025",     text: "Produit des chiffres = 2025" },
+        { key: "product2025",     text: "Produit de chaque chiffre = 2025" },
     ];
 
 
@@ -130,7 +130,9 @@ function displayRules(rules) {
 
     visibleRules.reverse();
 
-    container.innerHTML = visibleRules
+    container.innerHTML = "<h3>Contraintes pour le mot de passe : </h3>" 
+
+    container.innerHTML += visibleRules
         .map(r => `<p style="color:${r.ok ? "lightgreen" : "lightsalmon"}">${r.text}</p>`)
         .join("");
 
