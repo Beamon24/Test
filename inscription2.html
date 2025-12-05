@@ -8,6 +8,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<audio id="son" src="audio.mp3"></audio>
+
+<div class="son">
+    <img src="img/MutedButton.png" id="btnMute" style="width:40px; height:40px; cursor:pointer;">
+    <img src="img/SoundButton.png" id="btnSound" style="width:40px; height:40px; cursor:pointer; display:none ">
+</div>
+
+<script>
+const son = document.getElementById("son");
+const btnMute = document.getElementById("btnMute");
+const btnSound = document.getElementById("btnSound");
+
+
+btnMute.addEventListener("click", () => {
+    son.play();
+    btnMute.style.display = "none";
+    btnSound.style.display = "inline";
+});
+
+
+btnSound.addEventListener("click", () => {
+    son.pause();
+    son.currentTime = 0; 
+    btnSound.style.display = "none";
+    btnMute.style.display = "inline";
+});
+</script> 
+
 </head>
 <body>
 <div class="cours">
