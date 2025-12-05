@@ -1,0 +1,74 @@
+body { 
+    max-width: 600px; 
+    margin: 20px auto; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+
+    background-color: darkslateblue;
+    background-image: radial-gradient(circle at top, #ff00ff55, transparent 60%),
+                      radial-gradient(circle at bottom, #00ffff55, transparent 60%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color:gold;
+    font-family: "Bitcount Prop Single", system-ui;
+}
+
+
+h1{
+    text-align: center;
+}
+
+#thierry-image{
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#response { 
+    margin-top: 15px; 
+    padding: 10px; 
+    border: 1px solid #eee; 
+    background-color: #DEBCF7;
+    white-space: pre-wrap; 
+    color : #070078;
+}
+
+textarea { 
+    width: 100%; 
+    height: 100px; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    background-color: #DEBCF7;
+    color : #070078;
+}
+
+button { 
+    padding: 10px 15px; 
+    background-color: #DEBCF7; 
+    color: #070078; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+button:hover { 
+    background-color: #d7a6f9; 
+}
+
+.loading { 
+    color: #070078; 
+}
+
+img{
+    width: auto;
+    height: auto;
+}
+
+#reponse{
+    background-color: #DEBCF7;
+    color : #070078;
+}

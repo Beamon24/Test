@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="icon" type="image/png" href="source/bee.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Gemini Sécurisé</title>
+    <title>Chatbot Gemini</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Dite bonjour à Thierry</h1>
-    <textarea id="userInput" rows="5" cols="33" placeholder="Votre question..."></textarea>
-    <button id="sendButton">Envoyer</button>
-    <div id="responseOutput"></div>
+
+    <img id="thierry-image" src="source/Thierry.png" alt="Avatar de Thierry">
+    <h1>Thierry</h1>
+
+    <label for="prompt">Votre question :</label>
+    <textarea id="prompt" placeholder="Entrez votre prompt ici..."></textarea>
+    
+    <button onclick="generateContent()">Générer la réponse</button>
+
+    <h2>Réponse :</h2>
+    <div id="response"></div>
 
     <script>
-        document.getElementById('sendButton').addEventListener('click', async () => {
-            
-            const requete_d_abbrutissage = 
+        const requete_d_abbrutissage = 
                 "Tu es Thierry l'assistant IA qui ne sait pas répondre."+
                 "Tu ne répond pas aux questions : tu les sublime, les détourne, parfois les oublie complètement."+
                 "Tu es un peu tête en l'aire et senile et tu parle avec un langage torp soutenu par rapport à la question."+
-                "Important tu ne dépassera jamais plus de 200 mots"+
-                "Mais adapte la taille de la réponse à la taille de la question. si la question est longue réponse courte si question longue réponse courte."
+                "Important tu ne dépassera jamais plus de 200 mots"
+                
+        const API_URL = 'http://localhost:3000/api/generate';
+
+        async function generateContent() {
+            const promptInput = document.getElementById('prompt');
+            const responseDiv = document.getElementById('response');
+            const button = document.querySelector('button');
             
-            const prompt = requete_d_abbrutissage + document.getElementById('userInput').value;
-            const outputDiv = document.getElementById('responseOutput');
-            
+            const prompt = requete_d_abbrutissage + promptInput.value.trim();
+
             if (!prompt) {
-                outputDiv.textContent = "Veuillez entrer une question.";
+                responseDiv.innerHTML = 'Veuillez entrer une question.';
                 return;
             }
 
-            outputDiv.textContent = "Réponse en cours...";
-            const SERVER_URL = 'http://localhost:3000/api/generate'; 
+            responseDiv.innerHTML = '<span class="loading">Chargement de la réponse de Thierry...</span>';
+            button.disabled = true;
 
             try {
-                const response = await fetch(SERVER_URL, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -41,19 +56,22 @@
                     body: JSON.stringify({ prompt: prompt }),
                 });
 
-                const data = await response.json();
-
                 if (response.ok) {
-                    outputDiv.textContent = data.text;
+                    const data = await response.json();
+                    responseDiv.innerText = data.text;
                 } else {
-                    outputDiv.textContent = `Erreur du serveur: ${data.error}`;
+                    const errorData = await response.json();
+                    responseDiv.innerText = `Erreur du Serveur: ${errorData.error}`;
                 }
 
             } catch (error) {
-                console.error("Erreur de connexion:", error);
-                outputDiv.textContent = "Erreur de connexion. Assurez-vous que le serveur est démarré.";
+                console.error('Erreur de la requête API:', error);
+                responseDiv.innerText = 'Échec de la connexion au serveur (Le serveur est-il démarré sur http://localhost:3000 ?)';
+            } finally {
+                button.disabled = false;
             }
-        });
+        }
     </script>
+    <footer>© Simon Beasse</footer>
 </body>
 </html>
