@@ -7,4 +7,4 @@ Génération de réponse
 HTML5 / CSS3 / JavaScript / API Google
 
 ## 👥Contexte et équipe
-Ce projet a été réalisé dans le cadre de la Nuit de l’Info et appartient à l’équipe Tout pour l’argent, composée d’étudiants en Licence 3 Informatique à l’Université d’Angers.
+Ce projet a été réalisé dans le cadre de la Nuit de l’Info et appartient à l’équipe **[Tout pour l’argent](https://www.nuitdelinfo.com/inscription/equipes/608)**, composée d’étudiants en Licence 3 Informatique à l’Université d’Angers.
