@@ -135,7 +135,7 @@ function gameLoop() {
         score++;
         scoreDisplay.textContent = score;
         food = getRandomFoodPosition();
-        if (score === 5) {
+        if (score === 20) {
             clearInterval(game);
             victorySound.currentTime = 0;
             victorySound.play();
@@ -211,5 +211,6 @@ document.addEventListener('keyup', function(event) {
         arrowElement.classList.remove('arrow-pressed');
     }
 });
+
 
 game = setInterval(gameLoop, gameSpeed);
