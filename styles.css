@@ -221,27 +221,40 @@ h2::after {
 html {
   scroll-behavior: smooth;
 }
-#backToTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #222;
-    color: white;
-    padding: 12px 20px;
-    border: 3px solid #fff;
-    font-family: 'Press Start 2P', cursive;
-    box-shadow: 4px 4px 0 #000;
-    cursor: pointer;
-    display: none; /* on le montre seulement quand tu scroll */
-    transition: 0.2s;
-    border-radius: 5px;
-    z-index: 1000;
-}
+ #backToTop {
+      position: fixed;       /* le maintien sur l'écran */
+      bottom: 20px;          /* 20px du bas */
+      right: 20px;           /* 20px de la droite */
+      z-index: 9999;         /* au-dessus du contenu */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      /* apparence : tu peux remplacer par ton pixel-art via background-image */
+      background: black;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    }
 
-#backToTop:hover {
-    transform: translateY(-4px);
-    box-shadow: 6px 6px 0 #000;
-}
+    /* petit refinage pour l'icône/lien à l'intérieur */
+    #backToTop a {
+      color: #ffdd57;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      line-height: 56px;
+      text-align: center;
+    }
+
+    /* Masquer le bouton quand on est en haut (classe .hidden via JS) */
+    #backToTop.hidden {
+      display: none;
+    }
 
 
 video {
@@ -268,4 +281,32 @@ video {
 .inscription
 {
     text-align: right;
+}
+
+.inscriptiond {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 9999;
+    pointer-events: auto;
+}
+
+
+header {
+    background: darkslateblue;
+    padding: 20px;
+    text-align: center;
+    color: gold;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+
+.son img {
+  width:80px;
+  cursor:pointer;
+  position:fixed;
 }

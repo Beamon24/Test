@@ -12,14 +12,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
+<audio id="son" src="musique.mp3"></audio>
+
+<div class="son">
+    <img src="img/MutedButton.png" id="btnMute" style="width:40px; height:40px; cursor:pointer;">
+    <img src="img/SoundButton.png" id="btnSound" style="width:40px; height:40px; cursor:pointer; display:none ">
+</div>
+
+<script>
+const son = document.getElementById("son");
+const btnMute = document.getElementById("btnMute");
+const btnSound = document.getElementById("btnSound");
+
+
+btnMute.addEventListener("click", () => {
+    son.play();
+    btnMute.style.display = "none";
+    btnSound.style.display = "inline";
+});
+
+
+btnSound.addEventListener("click", () => {
+    son.pause();
+    son.currentTime = 0; 
+    btnSound.style.display = "none";
+    btnMute.style.display = "inline";
+});
+</script>
+
+        <div class="inscriptiond"> <a href="inscription/inscription.html"><img src="img/InscriptionButton.png" width="175 px" height="100 px"></a></div>
+ 
+
 </head>
 
 <audio src="musique.mp3"></audio>
 <body>
 
-     <section class="inscription" id="inscription">
-    <a href="inscription/inscription.html"><img src="img/InscriptionButton.png" width="175 px" height="100 px"></a>
-    </section>
+     
      <section id="head">
     <header>
         <h1>Bienvenue dans notre Nouveau Village Numérique</h1>
@@ -152,6 +181,39 @@ C'est d'abord par leur poids économique que les GAFAM se sont distinguées. Cer
         <p>&copy; Nuit de L'Info-2025 Tout pour l'Argent <a href="https://www.linkedin.com/in/guillaume-gascoin-b48633382/">Guillaume Gascoin</a></br><a href="https://www.linkedin.com/in/alexis-bernard-1b2b6835b/">Alexis Bernard</a> </br> <a href="https://www.linkedin.com/in/simon-beasse-0a3621380/">Simon Béasse</a> </br> <a href="https://www.linkedin.com/in/man48/">Majd Alhalah</a> </br>Enzo Côme. Tous droits réservés.</p><img src="img/Logo_UA.PNG" alt="Logo_UA.PNG" width="200px" height="100px">
     </footer>
     
+
+  <button id="backToTop" aria-label="Retour en haut" title="Retour en haut" class="btn-8bit">
+    <a href="#head" aria-hidden="true">↑</a>
+  </button>
+
+<script>
+    (function () {
+      const btn = document.getElementById('backToTop');
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector('#head');
+        if (target) {
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY,
+            behavior: 'smooth'
+          });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      function toggleBtn() {
+        if (window.scrollY <= 50) {
+          btn.classList.add('hidden');
+        } else {
+          btn.classList.remove('hidden');
+        }
+      }
+
+      toggleBtn();
+      window.addEventListener('scroll', toggleBtn);
+    })();
+  </script>
 </body>
-<button class="btn-8bit" class="btn btn-success"><a href="#head">↑</a></button>
 </html>
