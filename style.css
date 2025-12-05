@@ -9,7 +9,7 @@ body{
     justify-content: center;
 }
 
-div{
+#div1{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -19,7 +19,7 @@ div{
 
 #copy{
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     color: gold;
     font-size: 14px;
@@ -34,7 +34,11 @@ div{
 }
 
 h1{
-    letter-spacing: 10px;
+    font-size: 50px;
+}
+
+#titre{
+    letter-spacing: 15px;
     font-size: 50px;
 }
 
@@ -43,7 +47,7 @@ h3{
 
 }
 
-h1, h3 {
+#titre, h3 {
     color: gold;
 }
 

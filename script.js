@@ -103,7 +103,9 @@ function gameLoop() {
         losingSound.currentTime = 0;
         losingSound.play();
         let gameOverContent = 
-            "<h2 style='color: gold; text-align: center;'>Game Over! Votre score: " + score + "</h2>" + 
+            "<h1>Game Over ! </h1>" +
+            "<img src='images/defaite.png' alt='Défaite' style='width: 100px; margin-bottom: 20px;'> " + 
+            "<h2 style='color: gold; text-align: center;'>Votre score: " + score + "</h2>" +
             "<input type='button' value='Rejouer' onclick='location.reload()' style='padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;'>";
         section2.innerHTML = "<div class=\"bounce-animation gm\">" + gameOverContent + "</div>";
         return;
@@ -116,7 +118,9 @@ function gameLoop() {
         losingSound.currentTime = 0;
         losingSound.play();
         let gameOverContent = 
-            "<h2 style='color: gold; text-align: center;'>Game Over! Votre score: " + score + "</h2>" + 
+            "<h1>Game Over ! </h1>" +
+            "<img src='images/defaite.png' alt='Défaite' style='width: 100px; margin-bottom: 20px;'> " + 
+            "<h2 style='color: gold; text-align: center;'>Votre score: " + score + "</h2>" +
             "<input type='button' value='Rejouer' onclick='location.reload()' style='padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;'>";
         section2.innerHTML = "<div class=\"bounce-animation gm\">" + gameOverContent + "</div>";
         return;
@@ -131,12 +135,14 @@ function gameLoop() {
         score++;
         scoreDisplay.textContent = score;
         food = getRandomFoodPosition();
-        if (score === 20) {
+        if (score === 5) {
             clearInterval(game);
             victorySound.currentTime = 0;
             victorySound.play();
             let victoryContent = 
-            "<h2 style='color: gold; text-align: center;'>Félicitations! <br>Vous avez gagné avec un score de " + score + "!</h2>" + 
+            "<h1>Félicitations ! </h1>" +
+            "<img src='images/victoire.png' alt='Victoire' style='width: 100px; margin-bottom: 20px;'> " + 
+            "<h2 style='color: gold; text-align: center;'>Victoire avec un score de " + score + "!</h2>" + 
             "<input type='button' value='Rejouer' onclick='location.reload()' style='padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;'>";
             section2.innerHTML = "<div class=\"bounce-animation gm\">" + victoryContent + "</div>";
             checkAndSaveHighScore(score); 
