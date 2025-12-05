@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Gemini Sécurisé</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="chat-container">
-        <h1>Dite bonjour à Thierry</h1>
-        <img id="thierry-image" src="Thierry.png" alt="Avatar de Thierry">
-        <textarea id="userInput" rows="5" cols="33" placeholder="Votre question..."></textarea>
-        <button id="sendButton">Envoyer</button>
-        <div id="responseOutput">
-        </div>
-    </div>
+    <h1>Dite bonjour à Thierry</h1>
+    <textarea id="userInput" rows="5" cols="33" placeholder="Votre question..."></textarea>
+    <button id="sendButton">Envoyer</button>
+    <div id="responseOutput"></div>
 
     <script>
         document.getElementById('sendButton').addEventListener('click', async () => {

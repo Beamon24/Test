@@ -1,12 +1,16 @@
-# 🐈Chat'bruti
-La plateforme où tu peux discuter avec Thierry, une IA persuadée d’être brillante… mais qui se trompe souvent avec conviction.
-Propulsé par “Gemini”, pour le meilleur comme pour le pire !
+# 🐍Snake
+Cette intégration JavaScript correspond au défi **[Hidden Snake](https://www.nuitdelinfo.com/inscription/defis/483)**, implémentant un jeu de Snake jouable via les touches directionnelles (⬆︎ ⬇︎ ⬅︎ ➡︎).
+
+# 🎯Score
+Chaque bonus rapporte **1 point** et agrandit la taille de l’abeille d’une unité.  
+La limite de score est fixée à **20** : une fois atteinte, le joueur gagne.
 
 ## 🧩Fonctionnalités
-- Génération de réponse 
+- Gestion de la musique  
+- Jeu de Snake adapté au thème rétro  
 
 ## 🛠️Technologies
-HTML5 / CSS3 / JavaScript / API Google
+- HTML5 / CSS3 / JavaScript  
 
 ## 👥Contexte et équipe
-Ce projet a été réalisé dans le cadre de la Nuit de l’Info et appartient à l’équipe Tout pour l’argent, composée d’étudiants en Licence 3 Informatique à l’Université d’Angers.
+Ce projet a été réalisé dans le cadre de la Nuit de l’Info et appartient à l’équipe **Tout pour l’argent**, composée d’étudiants en Licence 3 Informatique à l’Université d’Angers.
