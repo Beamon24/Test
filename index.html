@@ -11,32 +11,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake</title>
-    <div class="son">
+    <audio id="son" src="sounds/musique_snake.mp3"></audio>
+
+<div class="son">
     <img src="images/MutedButton.png" id="btnMute" style="width:40px; height:40px; cursor:pointer;">
     <img src="images/SoundButton.png" id="btnSound" style="width:40px; height:40px; cursor:pointer; display:none ">
-    </div>
-    
-    <script>
-    const son = document.getElementById("son");
+</div>
+
+<script>
+const son = document.getElementById("son");
+son.volume = 0.5;
+son.loop = true;
+const btnMute = document.getElementById("btnMute");
+const btnSound = document.getElementById("btnSound");
+
+
+btnMute.addEventListener("click", () => {
+    son.play();
+    btnMute.style.display = "none";
+    btnSound.style.display = "inline";
+});
+
+
+btnSound.addEventListener("click", () => {
     son.pause();
-    const btnMute = document.getElementById("btnMute");
-    const btnSound = document.getElementById("btnSound");
-    
-    
-    btnMute.addEventListener("click", () => {
-        son.play();
-        btnMute.style.display = "none";
-        btnSound.style.display = "inline";
-    });
-    
-    
-    btnSound.addEventListener("click", () => {
-        son.pause();
-        son.currentTime = 0; 
-        btnSound.style.display = "none";
-        btnMute.style.display = "inline";
-    });
-    </script>
+    son.currentTime = 0; 
+    btnSound.style.display = "none";
+    btnMute.style.display = "inline";
+});
+</script> 
 </head>
 <body>
     <a href="https://www.linkedin.com/in/alexis-bernard-1b2b6835b/" target="_blank" id="copy">Made by Alexis Bernard</a>
@@ -69,6 +72,4 @@
     </div>
 </div>
 </body>
-
 </html>
-
